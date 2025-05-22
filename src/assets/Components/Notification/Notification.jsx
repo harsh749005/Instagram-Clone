@@ -1,4 +1,4 @@
-import React from 'react'
+import PropTypes from 'prop-types';
 import '../../../scroll.css'
 import NotificationCreateCard from '../../Notificationcard/Notificationcard'
 const Notification=({Notification})=> {
@@ -16,3 +16,6 @@ const Notification=({Notification})=> {
 }
 
 export default Notification
+Notification.propTypes ={
+  Notification: PropTypes.any.isRequired,
+}

@@ -1,7 +1,6 @@
-import React from 'react';
 import { TbPhotoVideo } from "react-icons/tb";
 import { IoMdClose } from "react-icons/io";
-
+import PropTypes from 'prop-types';
 const CreatePost = ({ visibility ,onClose,name}) => {
  
   return (
@@ -21,3 +20,8 @@ const CreatePost = ({ visibility ,onClose,name}) => {
 }
 
 export default CreatePost;
+CreatePost.propTypes = {
+  visibility: PropTypes.any.isRequired,
+  onClose : PropTypes.any.isRequired,
+  name:PropTypes.any.isRequired
+}
