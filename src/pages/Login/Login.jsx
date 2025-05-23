@@ -1,0 +1,155 @@
+import { useState } from 'react';
+import instaLogo from '../../assets/images/logo/instagram.png';
+import facebookLogo from '../../assets/images/logo/facebook.png'
+function App() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [credentials, setCredentials] = useState({
+    username: '',
+    password: ''
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Login attempted with:', credentials);
+  };
+
+  return (
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
+      <div className="w-full max-w-[350px] space-y-4">
+        {/* Login Form Card */}
+        <div className="bg-black border border-gray-700 p-8 rounded">
+          {/* Instagram Logo */}
+          <h1 className="text-center mb-8">
+            <img
+                src={instaLogo}
+alt="Instagram"
+              className="h-12 mx-auto"
+            />
+          </h1>
+
+          {/* Login Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <input
+                type="text"
+                placeholder="Phone number, username, or email"
+                className="w-full px-2 py-1.5 bg-black border border-gray-700 rounded text-sm text-white"
+                value={credentials.username}
+                onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+              />
+            </div>
+            
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                className="w-full px-2 py-1.5 bg-black border border-gray-700 rounded text-sm text-white pr-16"
+                value={credentials.password}
+                onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+              />
+              {credentials.password && (
+                <button
+                  type="button"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-sm font-semibold text-white"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? 'Hide' : 'Show'}
+                </button>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-[#0095F6] text-white py-1.5 rounded font-semibold"
+            >
+              Log in
+            </button>
+
+            <div className="flex items-center gap-4 my-4">
+              <div className="flex-1 h-px bg-gray-700"></div>
+              <span className="text-gray-500 text-sm font-semibold">OR</span>
+              <div className="flex-1 h-px bg-gray-700"></div>
+            </div>
+
+            <button
+              type="button"
+              className="w-full flex items-center justify-center gap-2 text-[#385185] font-semibold"
+            >
+              <img 
+                src={facebookLogo}
+alt="Facebook Icon" 
+                className="w-4 h-4"
+              />
+              Log in with Facebook
+            </button>
+
+            <div className="text-center mt-4">
+              <a href="#" className="text-xs text-[#385185]">
+                Forgot password?
+              </a>
+            </div>
+          </form>
+        </div>
+
+        {/* Sign Up Card */}
+        <div className="bg-black border border-gray-700 p-4 text-center">
+          <p className="text-white">
+            Dont have an account?{' '}
+            <a href="#" className="text-[#0095F6] font-semibold">
+              Sign up
+            </a>
+          </p>
+        </div>
+
+        {/* Get the app */}
+        <div className="text-center space-y-4">
+          <p className="text-white">Get the app.</p>
+          <div className="flex justify-center gap-4">
+            <a href="#" className="w-32">
+              <img
+                src="https://static.cdninstagram.com/rsrc.php/v3/yz/r/c5Rp7Ym-Klz.png"
+                alt="Get it on Google Play"
+                className="w-full"
+              />
+            </a>
+            <a href="#" className="w-32">
+              <img
+                src="https://static.cdninstagram.com/rsrc.php/v3/yu/r/EHY6QnZYdNX.png"
+                alt="Get it from Microsoft"
+                className="w-full"
+              />
+            </a>
+          </div>
+        </div>
+
+        {/* Footer Links */}
+        <div className="text-center text-xs text-gray-500 space-y-4">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+            <a href="#">Meta</a>
+            <a href="#">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Jobs</a>
+            <a href="#">Help</a>
+            <a href="#">API</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Locations</a>
+            <a href="#">Instagram Lite</a>
+            <a href="#">Threads</a>
+            <a href="#">Contact Uploading & Non-Users</a>
+            <a href="#">Meta Verified</a>
+          </div>
+          <div>
+            <select className="bg-transparent text-gray-500">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+            </select>
+            <span className="ml-4">© 2024 Instagram from Meta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
