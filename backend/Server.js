@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 const cors = require("cors");
-
+const bcrypt = require("bcrypt");
 
 const userModel = require("./models/usermodel");
 app.use(cors());
@@ -17,14 +17,22 @@ app.get("/",(req,res)=>{
 
 app.post("/signup",async (req,res)=>{
     const {username,email,password,fullname}= req.body;
-    let user = await userModel.create({
-        username,
-        fullname,
-        password,
-        email
-    });
+    let user = await userModel.findOne({email:email});
+    if(user) return res.json({message:"You already have an account",status:401});
+    bcrypt.genSalt(10,(err,salt)=>{
+        bcrypt.hash(password,salt, async(err,hash)=>{
+            if(err) return res.send(err.message);
+            let user = await userModel.create({
+                username,
+                fullname,
+                password : hash,
+                email
+            });
+            res.status(200).json({message:"Success",user,status:"user created"});
+            
+        })
+    })
 
-    res.status(200).json({message:"Success",user});
 })
 
 
