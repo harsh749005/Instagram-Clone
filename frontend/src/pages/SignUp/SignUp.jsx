@@ -1,18 +1,26 @@
 import { useState } from 'react';
+import axios from 'axios';
 import instaLogo from '../../assets/images/logo/instagram.png';
 import facebookLogo from '../../assets/images/logo/facebook.png'
 function App() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    emailOrPhone: '',
+    email: '',
     fullName: '',
     username: '',
     password: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Sign up attempted with:', formData);
+    try{
+
+      console.log('Sign up attempted with:', formData);
+      let response = await axios.post("http://localhost:3000/signup",formData)
+      console.log(response);
+    }catch(error){
+      console.log("Signup failed:",error);
+    }
   };
 
   return (
@@ -55,10 +63,10 @@ function App() {
           <form onSubmit={handleSubmit} className="space-y-2">
             <input
               type="text"
-              placeholder="Mobile Number or Email"
+              placeholder="Email"
               className="w-full px-2 py-1.5 bg-black border border-gray-700 rounded text-sm text-white"
-              value={formData.emailOrPhone}
-              onChange={(e) => setFormData({...formData,emailOrPhone:e.target.value})}
+              value={formData.email}
+              onChange={(e) => setFormData({...formData,email:e.target.value})}
             />
             
             <input
