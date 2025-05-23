@@ -2,14 +2,15 @@ import { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./Navbar";
 import Home from "./Home";
-import Login from "./Login";
+import Login from "./pages/Login/Login";
+import SignUp from "./pages/SignUp/SignUp"
 import Profile from "./Profile";
 import User from "./User";
 import Post from "./Post";
 import Reels from "./Reels";
 import Save from "./Save";
 import Tagged from "./Tagged";
-import CreatePost from "./assets/Components/Create/CreatePost";
+// import CreatePost from "./assets/Components/Create/CreatePost";
 import Notification from "./assets/Components/Notification/Notification";
 
 function App() {
@@ -35,7 +36,8 @@ function App() {
       ],
     },
     { path: "/", element: <><Navbar HandleNotification={HandleNotifiction} handle={handleCreatePostVisibility}/><Home /></> },
-    { path: "/login", element: <><Navbar HandleNotification={HandleNotifiction} handle={handleCreatePostVisibility}/><Login /></> },
+    { path: "/login", element: <><Login /></> },
+    { path: "/signup", element: <><SignUp /></> },
     { path: "/profile", element: <><Navbar HandleNotification={HandleNotifiction} handle={handleCreatePostVisibility}/><Profile /></> },
     
   ]);
@@ -43,7 +45,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
-      <CreatePost visibility={isCreatePostVisible}  name="harsh" onClose={handleCreatePostVisibility}/>
+      {/* <CreatePost visibility={isCreatePostVisible}  name="harsh" onClose={handleCreatePostVisibility}/> */}
       <Notification Notification={isNotification}/>
     </>
   );
