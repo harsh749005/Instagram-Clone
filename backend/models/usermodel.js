@@ -1,6 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require('../config/mongoose-connection');
 
-const userSchema = mongoose.Schema({
+
+
+const userSchema = new mongoose.Schema({
     fullname:{
         type:String,
         minLength:3,
