@@ -13,7 +13,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Login attempted with:', formData);
-    const response = await axios.post("http://localhost:3000/login",formData);
+    const response = await axios.post("http://localhost:3000/login",formData,{withCredentials:true});
     console.log(response);
   };
 
