@@ -17,7 +17,9 @@ function App() {
 
       console.log('Sign up attempted with:', formData);
       let response = await axios.post("http://localhost:3000/signup",formData)
+      console.log(response.data);
       if(response.data.status){
+        
         console.log(response.data.message);
       }
       else{
