@@ -4,6 +4,7 @@ const PORT = 3000;
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const {generateToken} = require("./utils/generateToken")
+require("dotenv").config();
 
 const userModel = require("./models/usermodel");
 const cookieParser = require("cookie-parser");
@@ -18,9 +19,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
 
+// protected route
+const authMiddleware = require('./middleware/middleware');
 
-app.get("/",(req,res)=>{
-    res.send("Hey this is server");
+app.get("/",authMiddleware,(req,res)=>{
+    res.json({
+        message: "This is a protected route.",
+    });
 })
 
 app.post("/signup",async (req,res)=>{
