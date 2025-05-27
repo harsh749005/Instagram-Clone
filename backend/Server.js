@@ -6,7 +6,14 @@ const bcrypt = require("bcrypt");
 const {generateToken} = require("./utils/generateToken")
 
 const userModel = require("./models/usermodel");
-app.use(cors());
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
+app.use(cors({
+    origin: "http://localhost:5173", // replace with your frontend URL
+    credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
@@ -29,8 +36,8 @@ app.post("/signup",async (req,res)=>{
                 password : hash,
                 email
             });
-            const Token = generateToken(user);
-            res.cookie("Token",Token);
+            let Token = generateToken(user);
+            res.cookie("token",Token);
             res.status(200).json({message:"user created",user,status:"success"});
             
         })
@@ -44,8 +51,8 @@ app.post("/login",async (req,res)=>{
     if(!user) return res.json({message:"Incorrect Email or Password",status:"401"});
     bcrypt.compare(password,user.password, function(err,result){
         if(!result) return res.status(401).send("Incorrect Password");
-        const Token = generateToken(user);
-        res.cookie("Token",Token);
+        let Token = generateToken(user);
+        res.cookie("token",Token);
         console.log(Token);
         res.status(200).json({message:"login success",user,status:"success"});
     })
