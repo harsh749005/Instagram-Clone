@@ -23,15 +23,13 @@ app.use(express.urlencoded({extended:true}));
 const authMiddleware = require('./middleware/middleware');
 
 app.get("/",authMiddleware,(req,res)=>{
-    res.json({
-        message: "This is a protected route.",
-    });
+    res.json({ userdata:req.user});
 })
 
 app.post("/signup",async (req,res)=>{
     const {username,email,password,fullname}= req.body;
     let user = await userModel.findOne({email:email});
-    if(user) return res.json({message:"You already have an account",status:401});
+    if(!user) return res.json({message:"You already have an account",status:409});
     bcrypt.genSalt(10,(err,salt)=>{
         bcrypt.hash(password,salt, async(err,hash)=>{
             if(err) return res.send(err.message);
@@ -41,7 +39,8 @@ app.post("/signup",async (req,res)=>{
                 password : hash,
                 email
             });
-            let Token = generateToken(user);
+            const userObj = user.toObject();
+            let Token = generateToken(userObj);
             res.cookie("token",Token);
             res.status(200).json({message:"user created",user,status:"success"});
             
@@ -56,7 +55,8 @@ app.post("/login",async (req,res)=>{
     if(!user) return res.json({message:"Incorrect Email or Password",status:"401"});
     bcrypt.compare(password,user.password, function(err,result){
         if(!result) return res.status(401).send("Incorrect Password");
-        let Token = generateToken(user);
+        const userObj = user.toObject();
+        let Token = generateToken(userObj);
         res.cookie("token",Token);
         console.log(Token);
         res.status(200).json({message:"login success",user,status:"success"});
