@@ -3,8 +3,9 @@ import instaLogo from '../../assets/images/logo/instagram.png';
 import facebookLogo from '../../assets/images/logo/facebook.png'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-
+import useUser from "../../context/useUser";
 function App() {
+  const {setUser} = useUser();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -17,8 +18,14 @@ function App() {
     console.log('Login attempted with:', formData);
     const response = await axios.post("http://localhost:3000/login",formData,{withCredentials:true});
     if(response.status === 200){
+      setUser(response.data.user.username);
+      // console.log(response.data.user.username);
       navigate("/");
     }
+    else{
+      console.log("Incorrect Email or password");
+    }
+
   };
 
 
