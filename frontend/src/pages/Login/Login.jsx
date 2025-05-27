@@ -1,17 +1,22 @@
 import { useState } from 'react';
 import instaLogo from '../../assets/images/logo/instagram.png';
 import facebookLogo from '../../assets/images/logo/facebook.png'
+import axios from 'axios';
+
 function App() {
   const [showPassword, setShowPassword] = useState(false);
-  const [credentials, setCredentials] = useState({
-    username: '',
+  const [formData, setFormData] = useState({
+    email: '',
     password: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login attempted with:', credentials);
+    console.log('Login attempted with:', formData);
+    const response = await axios.post("http://localhost:3000/login",formData);
+    console.log(response);
   };
+
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
@@ -34,8 +39,8 @@ alt="Instagram"
                 type="text"
                 placeholder="Phone number, username, or email"
                 className="w-full px-2 py-1.5 bg-black border border-gray-700 rounded text-sm text-white"
-                value={credentials.username}
-                onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
             </div>
             
@@ -44,10 +49,10 @@ alt="Instagram"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 className="w-full px-2 py-1.5 bg-black border border-gray-700 rounded text-sm text-white pr-16"
-                value={credentials.password}
-                onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               />
-              {credentials.password && (
+              {formData.password && (
                 <button
                   type="button"
                   className="absolute right-2 top-1/2 -translate-y-1/2 text-sm font-semibold text-white"
