@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import './classcss.css'
 import CreatePost from "./assets/Components/Create/CreatePost";
+import useUser from "./context/useUser";
 function User() {
   var clutter = "";
   const footerlinks = [
@@ -26,9 +27,10 @@ function User() {
   const [activeLink, setActiveLink] = useState("post");
   const [postvalue,postsetvalue] = useState(false);
   const [reelvalue,reelsetvalue] = useState(false);
-
+  const {user} = useUser();
+  console.log(user)
   const {naam} = useParams();
-  console.log(naam);
+  // console.log(naam);
   return (
     <>
       <div className=" h-screen bg-zinc-950 flex">
@@ -53,7 +55,7 @@ function User() {
 
                 <div className="profile-details ">
                   <div className="Profile-name h-20 bg-slate-950 flex space-x-5 items-center p-5">
-                    <h4 className=" text-xl">harshpatel2461</h4>
+                    <h4 className=" text-xl">{user}</h4>
                     <div className="button-container  space-x-3">
                       <button className=" w-28 p-1 rounded-lg font-medium bg-zinc-700">
                         Edit profile

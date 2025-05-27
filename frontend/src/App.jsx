@@ -12,6 +12,7 @@ import Save from "./Save";
 import Tagged from "./Tagged";
 // import CreatePost from "./assets/Components/Create/CreatePost";
 import Notification from "./assets/Components/Notification/Notification";
+import { UserProvider } from "./context/userContext";
 
 function App() {
   const [isCreatePostVisible, setCreatePostVisible] = useState("false"); // bug is that i am not able to pass true bez when 
@@ -44,9 +45,11 @@ function App() {
 
   return (
     <>
+    <UserProvider>
       <RouterProvider router={router} />
       {/* <CreatePost visibility={isCreatePostVisible}  name="harsh" onClose={handleCreatePostVisibility}/> */}
       <Notification Notification={isNotification}/>
+    </UserProvider>
     </>
   );
 }

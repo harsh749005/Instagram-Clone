@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link,useLocation, useParams } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
 import PropTypes from 'prop-types';
-
-function Navbar({ handle,HandleNotification }) {
+// { handle,HandleNotification }
+function Navbar() {
   const { naam } = useParams();
   const [Visivble,SetVisible] = useState(false);
   const VisibilityHandler = ()=>{
@@ -91,7 +91,7 @@ function Navbar({ handle,HandleNotification }) {
         </Link>
 
         <Link
-          onClick={HandleNotification}
+          // onClick={HandleNotification}
           
           to="#"
           className="link-container  bg-zinc-950 flex flex-col items-center"
@@ -108,7 +108,7 @@ function Navbar({ handle,HandleNotification }) {
 
         <Link
         to={currenturl.pathname}
-         onClick={handle}
+        //  onClick={handle}
           className="link-container  bg-zinc-950 flex flex-col items-center"
         >
           <div className="link-holder flex space-x-4 h-14 w-52 items-center px-3 hover:bg-[#131313] rounded-md cursor-pointer">

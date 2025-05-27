@@ -1,18 +1,18 @@
-import React, { useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useRef, useState } from "react";
 import Navbar from "./Navbar";
 import "./scroll.css";
-
 import Feed from "./assets/Components/Post/FeedPost";
 import Story from "./assets/Components/Story/Story";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import SuggestedForYou from "./assets/Components/Suggested/Suggested";
 import MyBadge from "./assets/Components/MyBadge/MyBadge";
-import CreatePost from "./assets/Components/Create/CreatePost";
+
+
 function Home() {
+
   const storyHolderRef = useRef(null);
   const [translateX, setTranslateX] = useState(0);
-
+  
   const handleNext = () => {
     setTranslateX((prev) => prev - 310);
   };

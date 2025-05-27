@@ -1,5 +1,3 @@
-import React from "react";
-import Footer from "./Footer";
 import InstaPostData from "./InstaPostData";
 import { FaHeart } from "react-icons/fa";
 import { FaComment } from "react-icons/fa6";
@@ -10,7 +8,7 @@ function Post() {
       <div className="pages-container-details gap-1 w-full h-auto flex flex-wrap  bg-zinc-900">
         {InstaPostData.map((postData) => {
           const { id, image } = postData;
-          console.log(postData.image);
+          // console.log(postData.image);
           return (
             <div className="image-holder group w-[17.9rem] h-[17.9rem] relative" key={id}>
               <img
