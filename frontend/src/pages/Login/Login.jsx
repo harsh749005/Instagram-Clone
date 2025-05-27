@@ -17,9 +17,9 @@ function App() {
     e.preventDefault();
     console.log('Login attempted with:', formData);
     const response = await axios.post("http://localhost:3000/login",formData,{withCredentials:true});
+
     if(response.status === 200){
-      setUser(response.data.user.username);
-      // console.log(response.data.user.username);
+      setUser(response.data.user.username); //context api , username 
       navigate("/");
     }
     else{
