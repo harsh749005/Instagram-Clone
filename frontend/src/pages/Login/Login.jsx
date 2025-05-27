@@ -2,8 +2,10 @@ import { useState } from 'react';
 import instaLogo from '../../assets/images/logo/instagram.png';
 import facebookLogo from '../../assets/images/logo/facebook.png'
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 function App() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -14,7 +16,9 @@ function App() {
     e.preventDefault();
     console.log('Login attempted with:', formData);
     const response = await axios.post("http://localhost:3000/login",formData,{withCredentials:true});
-    console.log(response);
+    if(response.status === 200){
+      navigate("/");
+    }
   };
 
 
@@ -100,9 +104,9 @@ alt="Facebook Icon"
         <div className="bg-black border border-gray-700 p-4 text-center">
           <p className="text-white">
             Dont have an account?{' '}
-            <a href="#" className="text-[#0095F6] font-semibold">
+            <Link  to="/signup" className="text-[#0095F6] font-semibold">
               Sign up
-            </a>
+            </Link>
           </p>
         </div>
 

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import axios from 'axios';
 import instaLogo from '../../assets/images/logo/instagram.png';
-import facebookLogo from '../../assets/images/logo/facebook.png'
+import facebookLogo from '../../assets/images/logo/facebook.png';
+import { useNavigate } from 'react-router-dom';
 function App() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -18,12 +20,12 @@ function App() {
       console.log('Sign up attempted with:', formData);
       let response = await axios.post("http://localhost:3000/signup",formData)
       console.log(response.data);
-      if(response.data.status){
-        
-        console.log(response.data.message);
+      if(response.data.status === 409){
+        // console.log("Account already exist");
+        navigate("/login")
       }
       else{
-        console.log(response.data.message);
+        navigate("/")
       }
       
     }catch(error){
@@ -70,7 +72,8 @@ function App() {
           {/* Sign Up Form */}
           <form onSubmit={handleSubmit} className="space-y-2">
             <input
-              type="text"
+              required
+              type="email"
               placeholder="Email"
               className="w-full px-2 py-1.5 bg-black border border-gray-700 rounded text-sm text-white"
               value={formData.email}
@@ -78,6 +81,7 @@ function App() {
             />
             
             <input
+              required
               type="text"
               placeholder="Full Name"
               className="w-full px-2 py-1.5 bg-black border border-gray-700 rounded text-sm text-white"
@@ -86,6 +90,7 @@ function App() {
             />
 
             <input
+              required
               type="text"
               placeholder="Username"
               className="w-full px-2 py-1.5 bg-black border border-gray-700 rounded text-sm text-white"
@@ -95,6 +100,7 @@ function App() {
             
             <div className="relative">
               <input
+                required
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 className="w-full px-2 py-1.5 bg-black border border-gray-700 rounded text-sm text-white pr-16"
