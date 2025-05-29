@@ -14,6 +14,7 @@ import Tagged from "./Tagged";
 import Notification from "./assets/Components/Notification/Notification";
 import { UserProvider } from "./context/userContext";
 import PrivateRoute from "./components/privateroute";
+import LogoutModal from "./pages/Logout/LogoutModel";
 
 function App() {
   const [isCreatePostVisible, setCreatePostVisible] = useState("false"); // bug is that i am not able to pass true bez when
@@ -32,8 +33,10 @@ function App() {
       element: (
 
         <PrivateRoute> 
+
         <User />
       </PrivateRoute>
+          
       ),
       children: [
         { path: "", element: <Post /> },
@@ -82,15 +85,23 @@ function App() {
         </>
       ),
     },
+    {
+      path:"/logout",
+      element:(
+        <>
+          <LogoutModal/>
+        </>
+      )
+    }
   ]);
 
   return (
     <>
-      <UserProvider>
+      
         <RouterProvider router={router} />
         {/* <CreatePost visibility={isCreatePostVisible}  name="harsh" onClose={handleCreatePostVisibility}/> */}
         <Notification Notification={isNotification} />
-      </UserProvider>
+     
     </>
   );
 }
