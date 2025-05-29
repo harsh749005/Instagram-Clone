@@ -6,6 +6,7 @@ import Story from "./assets/Components/Story/Story";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import SuggestedForYou from "./assets/Components/Suggested/Suggested";
 import MyBadge from "./assets/Components/MyBadge/MyBadge";
+import LogoutModal from "./pages/Logout/LogoutModel";
 
 
 function Home() {
@@ -64,6 +65,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <LogoutModal/>
     </div>
   );
 }

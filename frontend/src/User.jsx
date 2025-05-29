@@ -1,32 +1,33 @@
-import React, { useState } from "react";
-import { createBrowserRouter, useParams } from "react-router-dom";
+import  { useState } from "react";
+import {  useParams } from "react-router-dom";
 import { Link, Outlet } from "react-router-dom";
-import Post from "./Post";
+// import Post from "./Post";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import './classcss.css'
-import CreatePost from "./assets/Components/Create/CreatePost";
+// import CreatePost from "./assets/Components/Create/CreatePost";
 import useUser from "./context/useUser";
+import LogoutModal from "./pages/Logout/LogoutModel";
 function User() {
-  var clutter = "";
-  const footerlinks = [
-    "Meta",
-    "About",
-    "jobs",
-    "Help",
-    "API",
-    "Privacy",
-    "Terms",
-    "Location",
-    "Instagram Lite",
-    "Threads",
-    "Contact",
-    "Uploding & Non-Users",
-    "Meta Verified",
-  ];
+  // var clutter = "";
+  // const footerlinks = [
+  //   "Meta",
+  //   "About",
+  //   "jobs",
+  //   "Help",
+  //   "API",
+  //   "Privacy",
+  //   "Terms",
+  //   "Location",
+  //   "Instagram Lite",
+  //   "Threads",
+  //   "Contact",
+  //   "Uploding & Non-Users",
+  //   "Meta Verified",
+  // ];
   const [activeLink, setActiveLink] = useState("post");
-  const [postvalue,postsetvalue] = useState(false);
-  const [reelvalue,reelsetvalue] = useState(false);
+  // const [postvalue,postsetvalue] = useState(false);
+  // const [reelvalue,reelsetvalue] = useState(false);
   const {user} = useUser();
   console.log(user)
   const {naam} = useParams();
@@ -187,6 +188,7 @@ function User() {
               <Footer />
             </div>
           </div>
+      <LogoutModal/>
         </div>
       </div>
     </>

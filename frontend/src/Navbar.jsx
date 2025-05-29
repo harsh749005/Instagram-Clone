@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link,useLocation, useParams } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
 import PropTypes from 'prop-types';
+import useUser from "./context/useUser";
 // { handle,HandleNotification }
 function Navbar() {
   const { naam } = useParams();
@@ -9,8 +10,8 @@ function Navbar() {
   const VisibilityHandler = ()=>{
     SetVisible((prevVisible)=> !prevVisible )
   }
-
-  
+  const {setIsLogoutModalOpen,isLogoutModalOpen} = useUser();
+  console.log(isLogoutModalOpen);
     const currenturl = useLocation();
   
 
@@ -214,11 +215,12 @@ function Navbar() {
           </Link>
           <hr />
           <Link
-            to="#"
+            onClick={()=>setIsLogoutModalOpen(true)}
+            // to="/logout"
             className="link-container rounded-xl rounded-br-xl  bg-zinc-600 flex flex-col items-center"
           >
             <div className="link-holder flex space-x-4 h-[3.5rem] w-[100%] items-center px-3 hover:bg-zinc-500 hover:rounded-xl hovercursor-pointer">
-              <p className="text-white">Log out</p>
+              <p className="text-white" >Log out</p>
             </div>
           </Link>
         </div>
@@ -243,8 +245,8 @@ function Navbar() {
             />
           </div>
         </Link>
-
-        <Link to={naam ? `/${naam}/` : "/harsh/#"} onClick={VisibilityHandler} className="link-container  bg-zinc-950 flex flex-col items-center">
+{/* to={naam ? `/${naam}/` : "/harsh/#"} */}
+        <Link  onClick={VisibilityHandler} className="link-container  bg-zinc-950 flex flex-col items-center">
           <div className="link-holder flex space-x-4 h-14 w-52 items-center px-3 hover:bg-[#131313] rounded-md cursor-pointer">
             <img
               src="../src/assets/Menu.svg"

@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import useUser from '../../context/useUser';
-import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 
 const LogoutModal = () => {
